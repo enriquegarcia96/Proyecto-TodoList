@@ -7,7 +7,7 @@ const tareaSchema = new Schema ({
     description: { type: String, required: true  },
     estado: {type: Boolean, required: true },
       // para relacionar el modelo de usuario
-    usuario: {type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }
+    userName: {type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true }
 },{
     // con la fecha que se ingreso la tarea 
     timestamps: true
