@@ -1,13 +1,14 @@
 const Tarea = require('../models/tarea');
+const Usuario = require('../models/usuario');
 
 
 // ejemplo del controlador, PUEDES BORRARLO
-const getTareas = async(req, res) => {
+const getTareas = async (req, res, next) => {
     try {
-        const {titulo, descripcion} = req.body;
-        const verTarea = await Tarea.find({});
+        const verTarea = await Tarea.find();
+        res.status(200).json(verTarea);
     } catch (error) {
-        
+        console.log('Error al consultar en Mongo' + error);
     }
 }
 
@@ -15,7 +16,7 @@ const getTareas = async(req, res) => {
 const get_tarea = async(req, res) => {
     try {
         const {usuario} = req.body.usuario;
-        const verTareas = await Tarea.find({userName: usuario});
+        const verTareas = await Tarea.find({usuario: Usuario.userName});
         res.status(200).json(verTareas);
     } catch (error) {
         console.log('Error al consultar en Mongo' + error);
@@ -26,7 +27,7 @@ const get_tarea = async(req, res) => {
 const insert_tarea = async(req, res) => {
     try{
         const tarea = new Tarea(req.body);
-        carro.save();
+        tarea.save();
         res.status(200).json({resultado: 'Tarea agregada'});
     }
     catch(error){
@@ -57,14 +58,14 @@ const delete_tarea = async(req, res) => {
 }
 
 const update_tarea = async(req, res) => {
-    const cid= req.body.id;
+    const cid= req.body.idTarea;
     const tareaDB = await Tarea.findById(cid);
     if(!tareaDB){
         res.status(400).json({
             msg: 'No existe la tarea'
         });
     }
-
+    const datos = req.body;
     const tareaACtualizada = 
     await Tarea.findByIdAndUpdate(cid, datos, {new:true});
     res.status(200).json({tarea: tareaACtualizada});
