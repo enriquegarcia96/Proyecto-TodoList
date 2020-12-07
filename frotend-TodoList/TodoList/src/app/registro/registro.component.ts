@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {} from '@angular/router';
+import { } from '@angular/router';
 import { AppService } from '../app.service';
 
 @Component({
@@ -7,20 +7,21 @@ import { AppService } from '../app.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit {
-  public ingreso_usuario: any[];
-  public Usuario = {
-    usuario: "",
-    contra: ""
+export class RegistroComponent {
+
+  public  Usuario = {
+    usuario: '',
+    email: '',
+    contra: ''
 
   }
   constructor(public service:AppService) {
-    this.ingreso_usuario = [];
-   }
 
-   insert_usuario(){
+  }
+
+   crearUsuario(){
     var response;
-    this.service.insert_usuario().subscribe(
+    this.service.crearUsuario(this.Usuario).subscribe(
         data => response = data,
         err => {
             console.log("Error")
@@ -28,6 +29,7 @@ export class RegistroComponent implements OnInit {
         ()=>{
             this.Usuario = {
                 usuario: "",
+                email:"",
                 contra:"",
 
             }
@@ -37,7 +39,6 @@ export class RegistroComponent implements OnInit {
     )
 }
 
-  ngOnInit(): void {
-  }
 
 }
+

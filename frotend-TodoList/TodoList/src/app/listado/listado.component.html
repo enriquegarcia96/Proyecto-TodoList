@@ -1,1 +1,38 @@
-<p>listado works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+  <link rel="stylesheet" href="./font-awesome.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' media='screen' href='./listado.component.css'>
+  <title>Lista</title>
+</head>
+<body>
+  <div class="container">
+      <div class="header">
+           <p>ToDo List</p>
+          <div class="clear">
+              <i class="fa fa-refresh"></i>
+          </div>
+          <div id="date"></div>
+      </div>
+      <div class="content">
+          <ul id="list">
+              <li class="item">
+              </li>
+          </ul>
+      </div>
+      <div class="add-to-do">
+          <div class="item">
+          <i class="fa fa-trash-o de" job="delete" id="0"></i>
+          <i class="fa fa-plus-circle"[routerLink]="['/agregar-tarea']"></i>
+          </div>
+      </div>
+
+  </div>
+  <script src=""></script>
+
+</body>
+</html>

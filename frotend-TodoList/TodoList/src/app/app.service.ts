@@ -7,10 +7,16 @@ import {HttpClient} from '@angular/common/http';
 export class AppService{
   private endpoint:string;
   constructor(private httpClient: HttpClient) {
-    this.endpoint = "http://"+ window.location.hostname + ":3000/api"
+    this.endpoint = 'http://' + window.location.hostname + ':3000/TodoList'
    }
-   insert_usuario():Observable<any>{
-    return this.httpClient.post(this.endpoint + "/insert_usuario", {responseType: 'json'} )
-}
+
+   crearUsuario(load: { usuario: string; email: string; contra: string; }): Observable<any>{
+
+     return this.httpClient.post(this.endpoint + '/crearUsuario', load,  {responseType: 'json'})
+
+   }
+   iniciarSession(): Observable<any>{
+     return this.httpClient.get(this.endpoint+ '/iniciarSession', {responseType: 'json'})
+   }
 
 }
