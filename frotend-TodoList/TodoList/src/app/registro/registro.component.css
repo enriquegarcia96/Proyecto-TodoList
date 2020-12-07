@@ -23,12 +23,14 @@ border-style: none;
 transition: 0.5s ease-in;
 outline: none;
 box-shadow: none;
+color: azure;
 }
 
 .form-control:focus{
   background: none;
   box-shadow: none;
   outline: none;
+
 }
 .form-control::placeholder{
   color: aliceblue;

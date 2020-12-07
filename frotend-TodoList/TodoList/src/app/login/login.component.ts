@@ -7,39 +7,20 @@ import { AppService } from '../app.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  public ingreso_usuario: any[];
+export class LoginComponent  {
+
   public Usuario = {
     usuario: "",
+    email:"",
     contra: ""
 
+
   }
 
 
-  constructor(public service:AppService) {
-    this.ingreso_usuario = [];
-   }
+    constructor(public service:AppService) {
 
-   insert_usuario(){
-    var response;
-    this.service.insert_usuario().subscribe(
-        data => response = data,
-        err => {
-            console.log("Error")
-        },
-        ()=>{
-            this.Usuario = {
-                usuario: "",
-                contra:"",
-
-            }
+    }
 
 
-        }
-    )
-}
-
-  ngOnInit(): void {
   }
-
-}
