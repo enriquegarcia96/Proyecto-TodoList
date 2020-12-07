@@ -8,11 +8,11 @@ import {AgregarTareaComponent} from './agregar-tarea/agregar-tarea.component'
 
 
 const routes: Routes = [
-  { path:'login', component: LoginComponent},
-  {path:'registro', component:  RegistroComponent},
-  {path:'recu-clave', component: RecuClaveComponent},
-  {path:'listado', component: ListadoComponent},
-  {path:'agregar-tarea', component: AgregarTareaComponent}
+  {path: '', component: LoginComponent},
+  {path: 'registro', component:  RegistroComponent},
+  {path: 'recu-clave', component: RecuClaveComponent},
+  {path: 'listado', component: ListadoComponent},
+  {path: 'agregar-tarea', component: AgregarTareaComponent}
 
 
 ];

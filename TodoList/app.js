@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 
+
+
 var logger = require('morgan');
 
 
@@ -12,6 +14,7 @@ var cors = require('cors')
 // importo los paquetes 
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const nodemailer = require('nodemailer')
 
 // habilito la lectura de variables de entorno
 dotenv.config()
@@ -23,7 +26,8 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-
+app.use(cors())
+app.options('*', cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,9 +39,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+app.use('/todolist/', usersRouter)
 app.use('/Lista/', indexRouter);
 
-app.use('/TodoList/', usersRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,11 +52,7 @@ app.use(function(req, res, next) {
 });
 
 
-/***
- * * CORS
- */
- app.use(cors())
- app.options('*', cors())
+
 
 
 // error handler
