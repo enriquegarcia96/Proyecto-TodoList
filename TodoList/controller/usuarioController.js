@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 // modelo de usuario
 const Usuarios = require('../models/usuario')
 
+
 // tiempo de expiracion del token 
 const sessionAExpira = 60 * 10
 
@@ -15,13 +16,17 @@ const crearUsuario = async (req, res) =>{
         const {userName, email, password } = req.body
 
         // espera que encripte la contrseña del usuario y despues mande la respuesta
-        const encriptacionPassword = await bcrypt.hash(password, 15)
+        const encriptacionPassword = await bcrypt.hash(password, 5)
+        
 
         // guardo los datos en MONGO
         const usuario = new Usuarios()
         usuario.userName = userName
         usuario.email = email
         usuario.password = encriptacionPassword,
+
+        // para guardar el token unico de un usuario
+        usuario.token = jwt.sign({userId: userName}, process.env.JWT_SECRET)
         
         // mando los datos a guardar en mongo
         await usuario.save()
@@ -29,7 +34,9 @@ const crearUsuario = async (req, res) =>{
         res.send({status: '¡OK!', message: '¡Usuario Creado con Exito!'})
     } catch (error) {
         if (error.code && error.code === 11000) {
-            res.status(400).send({status: 'Llave duplicada', message: error.keyValue})
+            res.status(400).send({status: 'Usuario duplicado', message: error.keyValue})
+        }else{
+            
         }
     }
 }
@@ -45,19 +52,19 @@ const login = async( req, res) =>{
             // comprueba la contraseña que sea correcta
             const esCorrecto = await bcrypt.compare(password, usuario.password)
             if (esCorrecto) {
+                
                 //* genera un token firmado con JWTSCRET
                 const token  = jwt.sign (
                     {userId: usuario._id},
-                    process.env.JWT_SECRET, 
-                    {expiresIn: sessionAExpira}
-                    
+                    process.env.JWT_SECRET
+                    //{expiresIn: sessionAExpira}
                 ) //con esto genero un  token el cual almacena el userID 
-                res.send({status: 'Inicio session', data:{token, sessionAExpira, message: 'Segundos'}})
+                res.send({status: 'Inicio session'})
             }else{
-                res.status(403).send({status: 'Contraseña Incorrecta ¡BRO! :(', message: ''})
+                res.status(403).send({status: 'Contraseña Incorrecta ¡BRO! :('})
             }
         }else{
-            res.status(401).send({status: 'Correo no encontrado no econtrado', message: ''})
+            res.status(401).send({status: 'Correo no encontrado no econtrado'})
         }
     } catch (error) {
         res.status(500).send({status: '¡ERROR!', message: error.message})
@@ -65,8 +72,14 @@ const login = async( req, res) =>{
 }
 
 
+
+
+
+
+
 // exporto las funciones
 module.exports = {
     crearUsuario,
-    login
+    login,
+    
 }

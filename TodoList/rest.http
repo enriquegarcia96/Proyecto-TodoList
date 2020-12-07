@@ -1,0 +1,38 @@
+### crear un usuario
+post http://localhost:3000/TodoList/crearUsuario
+Content-Type: application/json
+
+{
+    "userName": "Diana",
+    "email": "santbanegas52@gmail.com",
+    "password": "1234"
+}
+
+
+### envia el token al correo del usuario siempre y cuando que exista
+post http://localhost:3000/TodoList/envioDelToken
+Content-Type: application/json
+
+{
+    "email":"santbanegas52@gmail.com"
+}
+
+### recibe el token y compara si es igual para cambiar la contraseña del usuario
+post http://localhost:3000/TodoList/password/:token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmNjZDIxMmU1M2UyZDBhMjA1NjUzMmYiLCJpYXQiOjE2MDcyODc5MTR9.j2R8E5dX64W8tVzMGCx_Ktl2ckEWXeobNzyzBWP9nUw"
+
+}
+
+### Inicio de session
+POST http://localhost:3000/TodoList/iniciarSession
+Content-Type: application/json
+
+{
+    "email": "kike@gmail.com",
+    "password": "123"
+}
+
+### 

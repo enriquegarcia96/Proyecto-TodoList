@@ -7,37 +7,40 @@ import { AppService } from '../app.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent {
+export class RegistroComponent  {
 
   public  Usuario = {
-    usuario: '',
+    userName: '',
     email: '',
-    contra: ''
+    password: ''
+  };
+
+  constructor(public service: AppService) {
 
   }
-  constructor(public service:AppService) {
 
-  }
+   crearUsuario(): void{
+    let response;
 
-   crearUsuario(){
-    var response;
     this.service.crearUsuario(this.Usuario).subscribe(
         data => response = data,
         err => {
-            console.log("Error")
+            console.log('Error', err);
         },
-        ()=>{
-            this.Usuario = {
-                usuario: "",
-                email:"",
-                contra:"",
-
-            }
-
-
+        () => {
+          this.limpiarDatos();
         }
-    )
+    );
 }
+
+  limpiarDatos(): void{
+    this.Usuario = {
+      userName: '',
+      email: '',
+      password: '',
+
+  };
+  }
 
 
 }
