@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { } from '@angular/router';
+import { Router} from '@angular/router';
 import { AppService } from '../app.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class RegistroComponent  {
     password: ''
   };
 
-  constructor(public service: AppService) {
+  constructor(public service: AppService, private router: Router) {
 
   }
 
@@ -28,6 +28,7 @@ export class RegistroComponent  {
             console.log('Error', err);
         },
         () => {
+          this.router.navigate(["/login"])
           this.limpiarDatos();
         }
     );

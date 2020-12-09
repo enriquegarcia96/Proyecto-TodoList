@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {} from '@angular/router';
+import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,16 +11,23 @@ import { AppService } from '../app.service';
 export class LoginComponent  {
 
   public Usuario = {
-    usuario: "",
-    email:"",
-    contra: ""
-
-
+    email: '',
+    password: ''
   }
 
 
-    constructor(public service:AppService) {
+    constructor(public service:AppService, private router: Router) {
 
+    }
+
+    login(){
+      return this.service.login(this.Usuario).subscribe(
+        data => {
+          console.log(data)
+          this.router.navigate(["/listado"])
+        },
+        error => console.log(error)
+      )
     }
 
 

@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>LogIn</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='./login.component.css'>
-  <script src='main.js'></script>
-</head>
-<body>
+
     <div class="container">
         <div class="row justify-content-center pt-5 mt-5 mr-1">
             <div class="col-md-4 formulario">
@@ -21,19 +11,21 @@
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
                       </svg>
-                        <input  [(ngModel)] ="Usuario.usuario" [ngModelOptions] ="{standalone:true}" type="text" class="form-control" placeholder="Usuario o Correo" >
+                      <input type="text" class="form-control" id="txtcolor" placeholder="Correo"
+                      [(ngModel)]="Usuario.email" [ngModelOptions]="{standalone:true}">
                     </div>
                     <!---Modelo de contraseña--->
                     <div class="form-group mx-sm-4 pt-4">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-lock2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM7 6a1 1 0 0 1 2 0v1H7V6zm3 0v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0z"/>
                       </svg>
-                      <input [(ngModel)] ="Usuario.contra" [ngModelOptions] ="{standalone:true}"
-                      type="password" class="form-control" placeholder="Contraseña">
+                      <input type="text" class="form-control" id="txtcolor" placeholder="Contraseña"
+                      [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone:true}">
 
                     </div>
+                    <!-- termina modulo de contra-->
                     <div  class="form-group mx-sm-4" >
-                      <input type="submit" class="btn btn-block ingresar"   value="INGRESAR">
+                      <input type="submit" class="btn btn-block ingresar"  (click)="login()" value="INGRESAR">
                     </div>
                     <div class="form-group mx-sm-4 text-right">
                       <span><a [routerLink]="['/recu-clave']" class="olvide">Olvide mi contraseña</a></span>
@@ -46,7 +38,3 @@
             </div>
         </div>
     </div>
-</body>
-</html>
-
-

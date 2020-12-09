@@ -14,23 +14,34 @@ const getTareas = async(req, res) => {
 // get de solo un usuario
 const get_tarea = async(req, res) => {
     try {
-        const {usuario} = req.body.usuario;
-        const verTareas = await Tarea.find({userName: usuario});
-        res.status(200).json(verTareas);
+        const userTask = await Tarea.find({
+            userName: req.params.userId
+        })
+        
+        res.send({status: 'OK', data: userTask})
     } catch (error) {
         console.log('Error al consultar en Mongo' + error);
+        res.status(500).send({status:'ERROR', data: error.message})
     }
 }
 
 //insertar una tarea
 const insert_tarea = async(req, res) => {
     try{
-        const tarea = new Tarea(req.body);
-        carro.save();
-        res.status(200).json({resultado: 'Tarea agregada'});
+        const {tituloDeLaTarea, description, estado, userName } =  (req.body);
+
+        const task = await Tarea.create({
+            tituloDeLaTarea,
+            description,
+            estado,
+            userName: userName
+        })
+        //tarea.save();
+        res.send({status: 'Tarea agregada', data: task})
     }
     catch(error){
         console.log('Error al insertar en Mongo' + error);
+        res.status(500).send({status: 'ERROR', data: error.message})
     }
 }
 

@@ -11,6 +11,8 @@ import { AgregarTareaComponent } from './agregar-tarea/agregar-tarea.component';
 import {AppService} from '././app.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { TokenformComponent } from './tokenform/tokenform.component';
+import { NewpasswordComponent } from './newpassword/newpassword.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {FormsModule} from '@angular/forms';
     RegistroComponent,
     RecuClaveComponent,
     ListadoComponent,
-    AgregarTareaComponent
+    AgregarTareaComponent,
+    TokenformComponent,
+    NewpasswordComponent
   ],
   imports: [
     BrowserModule,
