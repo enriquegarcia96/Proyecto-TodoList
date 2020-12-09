@@ -7,8 +7,11 @@ const servicioDePassword = require('../service/servicioDeRecuperacion')
 
 router.post('/crearUsuario', usuarioControlador.crearUsuario)
 router.post('/iniciarSession', usuarioControlador.login)
-router.post('/envioDelToken', servicioDePassword.envioDelToken)
 
+
+// reseteo de contraseña y cambio de token
 router.post('/password/:token', servicioDePassword.comparaElToken);
+router.post('/envioDelToken', servicioDePassword.envioDelToken);
+router.post('/changepassword', servicioDePassword.changePassword);
 
 module.exports = router;

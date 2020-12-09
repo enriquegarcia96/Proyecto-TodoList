@@ -16,7 +16,7 @@ const crearUsuario = async (req, res) =>{
         const {userName, email, password } = req.body
 
         // espera que encripte la contrseña del usuario y despues mande la respuesta
-        const encriptacionPassword = await bcrypt.hash(password, 5)
+        const encriptacionPassword = await bcrypt.hash(password, 2)
         
 
         // guardo los datos en MONGO

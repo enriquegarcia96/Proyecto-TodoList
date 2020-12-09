@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const expiraElToken = 4 * 10
 
 const ModeloUsuario = require('../models/usuario')
+const modeloUsuario = require('../models/usuario')
 
 
 
@@ -60,10 +61,9 @@ const envioDelToken = async (req, res) =>{
 
 // compara si el token es el mismo de la base de datos de mongodb
 const comparaElToken =  async (req, res) =>{
-    
     try {
         let token  = req.body.token
-        
+
         const existeElToken = await ModeloUsuario.findOne({ token })
         
         if (existeElToken.token === token) {
@@ -71,8 +71,7 @@ const comparaElToken =  async (req, res) =>{
             let generoUnNuevoToken = jwt.sign({userId: existeElToken._id}, process.env.JWT_SECRET)
 
             //* le actualizo el token al usuario y se lo guardo en la base
-            await ModeloUsuario.findByIdAndUpdate(existeElToken._id, {token:generoUnNuevoToken},{new: true})
-            
+            await ModeloUsuario.findByIdAndUpdate(existeElToken._id, {token:generoUnNuevoToken},{new: true})            
             res.send({status: 'token actualizado', message: generoUnNuevoToken})
         }else{
             console.log('no existe el token')
@@ -80,11 +79,30 @@ const comparaElToken =  async (req, res) =>{
     } catch (error) {
         res.status(500).send({status: '¡ERROR!', message: error.message})
     }
-
-
 }
+
+
+// cambio de contraseña del usuario
+const changePassword = async (req, res) => {
+    
+    // todo: cambiar la contraseña idea => 
+    try {
+        const {pass1, pass2} = req.body
+        if (pass1 === pass2) {
+            //console.log(pass2, pass1)
+            await ModeloUsuario.findByIdAndUpdate(password, {pass1}, {new: true})
+            res.send({status: '¡Contraseña Actualizada!', message: password1})
+        } else {
+            res.status(500).send({status: '¡Error al actualizar!', message: error.message})
+        }
+    } catch (error) {
+        
+    }
+}
+
 
 module.exports = {
     envioDelToken,
-    comparaElToken
+    comparaElToken,
+    changePassword
 }
