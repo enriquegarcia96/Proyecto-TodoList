@@ -1,38 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
-  <link rel="stylesheet" href="./font-awesome.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel='stylesheet' type='text/css' media='screen' href='./listado.component.css'>
-  <title>Lista</title>
-</head>
-<body>
+
   <div class="container">
       <div class="header">
-           <p>ToDo List</p>
           <div class="clear">
               <i class="fa fa-refresh"></i>
           </div>
           <div id="date"></div>
       </div>
       <div class="content">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Titulo Tarea</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let v of listado_tareas">
+              <td>{{v.username}}</td>
+              <td>
+                <button type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#EditarModal"
+                        (click)="pasarTareas(v)"
+                        >
+                  Editar
+                </button>
+              </td>
+              <td>
+                  <button class="btn btn-danger"
+                          (click)="delete_tareas(v.titulo_tarea)">
+                      Borrar
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+        <!--Terminacion del listado de tareas-->
           <ul id="list">
-              <li class="item">
-              </li>
+            <!--Modal de insertar-->
+          <form ngNativeValidate #form>
+            <div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos del Vehículo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="txtplaca">Titulo Tareas</label>
+                        <input type="text"
+                               class="form-control"
+                               id="txtplaca"
+                               placeholder="Introduzca el número de placa"
+                               [(ngModel)]="Tareas.titulo_tarea"
+                               [ngModelOptions]="{standalone:true}"
+                               >
+                          </div>
+
+                        <div class="form-group">
+                        <label for="txtcolor">Color:</label>
+                        <input type="text"
+                               class="form-control"
+                               id="txtcolor"
+                               placeholder="Introduzca el color del carro"
+                               [(ngModel)]="Tareas.descripcion"
+                               [ngModelOptions]="{standalone:true}">
+                        </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-primary"
+                            (click)="form.checkValidity()?insert_tareas():null"
+                            >Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--modal insertar terminado-->
+
+
+
+          <!--Modal  update-->
+        <form ngNativeValidate #form>
+          <div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modificar datos del Vehículo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="txtplaca">Titulo Tareas</label>
+                      <input type="text"
+                             class="form-control"
+                             id="txtplaca"
+                             placeholder="Introduzca el número de placa"
+                             [(ngModel)]="Tareas.titulo_tarea"
+                             [ngModelOptions]="{standalone:true}"
+                             >
+                        </div>
+
+                      <div class="form-group">
+                      <label for="txtcolor">Color:</label>
+                      <input type="text"
+                             class="form-control"
+                             id="txtcolor"
+                             placeholder="Introduzca el color del carro"
+                             [(ngModel)]="Tareas.descripcion"
+                             [ngModelOptions]="{standalone:true}">
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button"
+                          class="btn btn-primary"
+                          (click)="form.checkValidity()?update_tareas():null"
+                          >Guardar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+          <!--Modal update terminado-->
           </ul>
+
       </div>
+
       <div class="add-to-do">
           <div class="item">
           <i class="fa fa-trash-o de" job="delete" id="0"></i>
-          <i class="fa fa-plus-circle"[routerLink]="['/agregar-tarea']"></i>
+          <i class="fa fa-plus-circle"></i>
           </div>
       </div>
 
-  </div>
-  <script src=""></script>
-
-</body>
-</html>
