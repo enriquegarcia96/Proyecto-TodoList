@@ -18,11 +18,11 @@ Content-Type: application/json
 }
 
 ### recibe el token y compara si es igual para cambiar la contraseña del usuario
-post http://localhost:3000/TodoList/password/:token
+post http://localhost:3000/todolist/password/:token
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmNjZDIxMmU1M2UyZDBhMjA1NjUzMmYiLCJpYXQiOjE2MDcyODc5MTR9.j2R8E5dX64W8tVzMGCx_Ktl2ckEWXeobNzyzBWP9nUw"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmNmNjk5N2M5ZDgwODJlNzQyMjY4YjYiLCJpYXQiOjE2MDc0Mjg3OTV9.teEjRY2DLQWcTPFyiG3AdENCJ4y-OEgcpNFRhQIAaKY"
 
 }
 
@@ -35,4 +35,4 @@ Content-Type: application/json
     "password": "123"
 }
 
-### 
+### Reinicio de la contraseña  cuando el usuario ya mande el token nuevo 
