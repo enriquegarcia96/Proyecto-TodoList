@@ -58,8 +58,9 @@ const login = async( req, res) =>{
                     {userId: usuario._id},
                     process.env.JWT_SECRET
                     //{expiresIn: sessionAExpira}
-                ) //con esto genero un  token el cual almacena el userID 
-                res.send({status: 'Inicio session'})
+                ) //con esto genero un  token el cual almacena el userID
+                const userID1 = await Usuarios.findOne({email})
+                res.send({status: userID1._id})
             }else{
                 res.status(403).send({status: 'Contraseña Incorrecta ¡BRO! :('})
             }
@@ -71,7 +72,19 @@ const login = async( req, res) =>{
     }
 }
 
-
+// obtener id
+const get_idUsuario = async(req, res) => {
+    try {
+        const userID = await Usuarios.find({
+            email: req.body.email
+        })
+        
+        res.send({status: 'OK', data: userID._id})
+    } catch (error) {
+        console.log('Error al consultar en Mongo' + error);
+        res.status(500).send({status:'ERROR', data: error.message})
+    }
+}
 
 
 
@@ -81,5 +94,5 @@ const login = async( req, res) =>{
 module.exports = {
     crearUsuario,
     login,
-    
+    get_idUsuario
 }

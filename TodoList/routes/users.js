@@ -8,7 +8,7 @@ const servicioDePassword = require('../service/servicioDeRecuperacion')
 router.post('/crearUsuario', usuarioControlador.crearUsuario)
 router.post('/iniciarSession', usuarioControlador.login)
 router.post('/envioDelToken', servicioDePassword.envioDelToken)
-
+router.post('/get_idUsuario/:_id', usuarioControlador.get_idUsuario)
 router.post('/password/:token', servicioDePassword.comparaElToken);
 
 module.exports = router;
