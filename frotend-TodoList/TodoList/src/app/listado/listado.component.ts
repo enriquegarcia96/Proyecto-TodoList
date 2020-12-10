@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -10,9 +10,9 @@ import { AppService } from '../app.service';
 export class ListadoComponent implements OnInit {
   public listado_tareas : any [];
   public Tareas ={
-    titulo_tarea: "",
-    descripcion: "",
-    username: ""
+    tituloDeLaTarea: "",
+    description: "",
+    userName: ""
 
   }
   constructor(public service:AppService) {
@@ -43,10 +43,16 @@ export class ListadoComponent implements OnInit {
         },
         ()=>{
             this.Tareas = {
-                titulo_tarea: "",
-                descripcion:"",
-                username:""
+              tituloDeLaTarea: "",
+                description:"",
+                userName:""
             }
+
+          swal.fire({
+            title: 'Tarea Agregado Satisfactoriamnete',
+            text: "Buen trabajo!",
+            icon: 'success'
+          })
 
             this.get_tareas();
 
@@ -54,10 +60,10 @@ export class ListadoComponent implements OnInit {
     )
 }
 
-delete_tareas(titulo_tarea: any){
+delete_tareas( tituloDeLaTarea: any){
   var response;
   var load={
-      titulo_tarea : titulo_tarea
+    tituloDeLaTarea :  tituloDeLaTarea
   }
   this.service.delete_tareas(load).subscribe(
       data => response = data,
@@ -71,11 +77,11 @@ delete_tareas(titulo_tarea: any){
   )
 }
 
-pasarTareas(tarea: { titulo_tarea: any; descripcion: any; }){
+pasarTareas(tarea: {  tituloDeLaTarea: any; description: any; userName:any }){
   this.Tareas={
-      titulo_tarea:tarea.titulo_tarea,
-      descripcion:tarea.descripcion,
-      username:tarea.descripcion
+    tituloDeLaTarea:tarea.tituloDeLaTarea,
+      description:tarea.description,
+      userName:tarea.userName
   }
 }
 
@@ -88,6 +94,12 @@ update_tareas(){
           console.log("Ocurrio un error al llamar el servicio");
       },
       ()=>{
+
+        swal.fire({
+          title: 'Tarea Actualizado Agregado Satisfactoriamnete',
+          text: "Buen trabajo!",
+          icon: 'success'
+        })
 
              this.get_tareas();
       }
