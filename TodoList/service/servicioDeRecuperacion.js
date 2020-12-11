@@ -4,16 +4,14 @@ require('dotenv').config()
 
 // paquete para generar tokes
 const jwt = require('jsonwebtoken')
-
-const expiraElToken = 4 * 10
-
+const bcryt = require('bcrypt')
 const ModeloUsuario = require('../models/usuario')
-const modeloUsuario = require('../models/usuario')
 
 
 
 //* transporte para enviar correo de recuperacion
 const envioDelToken = async (req, res) =>{
+
     try {
         const {email} = req.body
 
@@ -21,9 +19,6 @@ const envioDelToken = async (req, res) =>{
         const correoExisteEnDB = await ModeloUsuario.findOne({email})
         if (correoExisteEnDB) {
             
-            // 1) en otro ruta que meta el token que se envio al correo 
-            // 2) se le envia a otro formulario para que actualice la contraseña
-
             // traigo el token del objeto correoExisteEnDB
             let tokenBaseDeDatos = correoExisteEnDB.token
             
@@ -34,12 +29,14 @@ const envioDelToken = async (req, res) =>{
                     pass: process.env.PASSWORD
                 }
             })
-        
+            
+            // todo: mejorar el html 
             let opcionesEmail = {
                 from: "santbanegas52@gmail.com",
                 to: email,
                 subject: "enviado desde nodemailer",
-                text: `Su token para que pueda actualizar su contraseña: ${tokenBaseDeDatos}`
+                html:`<h5>click en esto <a href="http://localhost:4200/tokenform</a>Su token para que pueda actualizar su contraseña: ${tokenBaseDeDatos}</h5>`
+                
             }       
             transporte.sendMail(opcionesEmail, (error, info)=>{
                 if (error) {
@@ -52,6 +49,29 @@ const envioDelToken = async (req, res) =>{
             })
         }else{
             res.status(403).send({status: 'correo no existe'})
+            let transporte = nodemailer.createTransport({
+                service: 'gmail',
+                auth:{
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
+            })
+        
+            let opcionesEmail = {
+                from: "santbanegas52@gmail.com",
+                to: email,
+                subject: "enviado desde nodemailer",
+                text: `este correo no existe en nuestra base de datos`
+            }       
+            transporte.sendMail(opcionesEmail, (error, info)=>{
+                if (error) {
+                    console.log('Error al intentar enviar el correo', error)
+                    res.status(500).send(error.message)
+                 }else{
+                    console.log('¡Correo enviado con exito!')
+                    res.status(200).send({status: 'Correo enviado con exito'})
+                 }
+            })
         }
     } catch (error) {
         res.status(500).send({status: '¡ERROR!', message: error.message})
@@ -72,31 +92,32 @@ const comparaElToken =  async (req, res) =>{
 
             //* le actualizo el token al usuario y se lo guardo en la base
             await ModeloUsuario.findByIdAndUpdate(existeElToken._id, {token:generoUnNuevoToken},{new: true})            
-            res.send({status: 'token actualizado', message: generoUnNuevoToken})
-        }else{
-            console.log('no existe el token')
+
+            // le mando el _id del usuario
+            res.send({status: existeElToken._id, message: generoUnNuevoToken})
         }
     } catch (error) {
-        res.status(500).send({status: '¡ERROR!', message: error.message})
+        res.status(500).send({status: 'No existe ese token en la base de datos '})
     }
 }
 
 
 // cambio de contraseña del usuario
 const changePassword = async (req, res) => {
-    
-    // todo: cambiar la contraseña idea => 
     try {
-        const {pass1, pass2} = req.body
-        if (pass1 === pass2) {
-            //console.log(pass2, pass1)
-            await ModeloUsuario.findByIdAndUpdate(password, {pass1}, {new: true})
-            res.send({status: '¡Contraseña Actualizada!', message: password1})
+        let userId = req.params.id
+        let {password1, password2} = req.body
+
+        if (password1 === password2) {
+            const newPasswordEncriptado = await bcryt.hash(password1,2)
+            await ModeloUsuario.findByIdAndUpdate(userId, {password: newPasswordEncriptado}, {new: true})
+            res.send({status: '¡Contraseña Actualizada!', message: 'OK'})
         } else {
-            res.status(500).send({status: '¡Error al actualizar!', message: error.message})
+            res.status(500).send({status: '!Contraseña incorrecta¡', message: error.message})
         }
     } catch (error) {
-        
+        res.status(500).send({status: 'Error'})
+
     }
 }
 
