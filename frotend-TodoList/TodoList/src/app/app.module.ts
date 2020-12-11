@@ -24,7 +24,7 @@ import { NewpasswordComponent } from './newpassword/newpassword.component';
     ListadoComponent,
     AgregarTareaComponent,
     TokenformComponent,
-    NewpasswordComponent
+    NewpasswordComponent,
   ],
   imports: [
     BrowserModule,
