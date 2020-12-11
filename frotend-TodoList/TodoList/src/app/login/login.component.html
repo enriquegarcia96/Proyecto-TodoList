@@ -1,8 +1,8 @@
 
-    <div class="container">
+    <div class="container" ngNativeValidate #form>
         <div class="row justify-content-center pt-5 mt-5 mr-1">
             <div class="col-md-4 formulario">
-                <form >
+                <form   ngNativeValidate #form>
                     <div class="form-group text-center pt-3">
                       <h1 class="text-light"> INICIAR SESION</h1>
                     </div>
@@ -12,7 +12,9 @@
                         <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
                       </svg>
                       <input type="text" class="form-control" id="txtcolor" placeholder="Correo"
-                      [(ngModel)]="Usuario.email" [ngModelOptions]="{standalone:true}">
+                      [(ngModel)]="Usuario.email" [ngModelOptions]="{standalone:true}"
+                      pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                      >
                     </div>
                     <!---Modelo de contraseña--->
                     <div class="form-group mx-sm-4 pt-4">
@@ -20,7 +22,9 @@
                         <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM7 6a1 1 0 0 1 2 0v1H7V6zm3 0v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0z"/>
                       </svg>
                       <input type="text" class="form-control" id="txtcolor" placeholder="Contraseña"
-                      [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone:true}">
+                      [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone:true}"
+                      pattern="[a-zA-Z]+{45}"
+                      >
 
                     </div>
                     <!-- termina modulo de contra-->

@@ -11,7 +11,9 @@ router.get('/', function(req, res, next) {
 
 
 // ejemplo de ruteo, puedes borrarlo
-router.get('/get_tarea/:userId', tareaControlador.get_tarea)
+
+router.get('/getTareas', tareaControlador.getTareas)
+router.get('/get_tarea', tareaControlador.get_tarea)
 router.post('/insert_tarea', tareaControlador.insert_tarea)
 router.delete('/delete_tarea', tareaControlador.delete_tarea)
 router.put('/update_tarea', tareaControlador.update_tarea)
