@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -86,6 +88,12 @@ export class ListadoComponent implements OnInit {
                 userName:""
             }
 
+          swal.fire({
+            title: 'Tarea Agregado Satisfactoriamnete',
+            text: "Buen trabajo!",
+            icon: 'success'
+          })
+
             this.get_tareas();
 
         }
@@ -128,6 +136,12 @@ update_tareas(){
           console.log("Ocurrio un error al llamar el servicio");
       },
       ()=>{
+
+        swal.fire({
+          title: 'Tarea Actualizado Agregado Satisfactoriamnete',
+          text: "Buen trabajo!",
+          icon: 'success'
+        })
 
              this.get_tareas();
       }

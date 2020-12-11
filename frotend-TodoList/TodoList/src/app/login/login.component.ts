@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import swal from 'sweetalert2';
+
+
 
 
 @Component({
@@ -16,6 +19,7 @@ export class LoginComponent  {
   }
 
 
+
     constructor(public service:AppService, private router: Router) {
 
     }
@@ -27,6 +31,7 @@ export class LoginComponent  {
           this.router.navigate(["/listado", {idusuario:data.status} ])
         },
         error => console.log(error)
+
       )
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { AppService } from '../app.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -28,6 +29,12 @@ export class RegistroComponent  {
             console.log('Error', err);
         },
         () => {
+
+          swal.fire({
+            title: 'Usuario Agregado Satisfactoriamnete',
+            text: "Buen trabajo!",
+            icon: 'success'
+          })
           this.router.navigate(["/login"])
           this.limpiarDatos();
         }
