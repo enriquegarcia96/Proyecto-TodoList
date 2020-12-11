@@ -1,134 +1,184 @@
 <div class="container-fluid">
   <h1 class="text-primary">Listado de Tareas</h1>
 
-  <button
-  (click)="get_tareas()"
-  class="btn btn-info btn-sm">Cargar Tareas</button>
-
-  <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Titulo Tarea</th>
-          <th scope="col">Descripcion</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let v of listado_tareas">
-          <td>{{v.useName}}</td>
-          <td>
-            <button type="button"
-                    class="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#EditarModal"
-                    (click)="pasarTareas(v)"
-                    >
-              Editar
-            </button>
-          </td>
-          <td>
-              <button class="btn btn-danger"
-                      (click)="delete_tareas(v.userName)">
-                  Borrar
-              </button>
-          </td>
-
-          <td>
-            <button class="btn btn-danger"
-                    (click)="insert_tareas()">
-                Insertar
-            </button>
-        </td>
-        </tr>
-      </tbody>
-    </table>
-
-
-<h2 class="text-info">Insertar un vehículo</h2>
-
-<form ngNativeValidate #form>
-  <div class="form-group">
-    <label for="txtplaca">Tarea:</label>
-    <input type="text"
-           class="form-control"
-           id="txtplaca"
-           placeholder="Introduzca el número de placa"
-           [(ngModel)]="Tareas.tituloDeLaTarea"
-           [ngModelOptions]="{standalone:true}"
-
-           required="true"
-           pattern="[a-zA-Z]+{45}"
-           >
-      </div>
-
-    <div class="form-group">
-    <label for="txtcolor">Descripcion:</label>
-    <input type="text"
-           class="form-control"
-           id="txtcolor"
-           placeholder="Introduzca el color del carro"
-           [(ngModel)]="Tareas.description"
-           [ngModelOptions]="{standalone:true}"
-
-           required="true"
-           pattern="[a-zA-Z]+{45}"
-           >
-    </div>
-
-  <button
-  (click)="form.checkValidity()? insert_tareas():null"
-  class="btn btn-primary"> Insertar Vehículo</button>
-
-</form>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Modificar datos del Vehículo</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="txtplaca">Placa:</label>
-          <input type="text"
-                 class="form-control"
-                 id="txtplaca"
-                 placeholder="Introduzca el número de placa"
-                 [(ngModel)]="Tareas.tituloDeLaTarea"
-                 [ngModelOptions]="{standalone:true}"
-                 readonly="true">
-            </div>
-
-          <div class="form-group">
-          <label for="txtcolor">Descripcion:</label>
-          <input type="text"
-                 class="form-control"
-                 id="txtcolor"
-                 placeholder="Introduzca el color del carro"
-                 [(ngModel)]="Tareas.description"
-                 [ngModelOptions]="{standalone:true}">
+  <div class="container">
+      <div class="header">
+          <div class="clear">
+              <i class="fa fa-refresh"></i>
           </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button"
-              class="btn btn-primary"
-              (click)="update_tareas()"
-              >Guardar</button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-    </div>
-  </div>
-</div>
-</div>
-<!--Termina modal update-->
+          <div id="date"></div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()"  >
+            Agregar
+          </button> 
+      </div>
+      <div class="content">
 
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Titulo</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let v of listado_tareas">
+              <td>{{v.tituloDeLaTarea}}</td>
+              <td>{{v.description}}</td>
+              <td>
+                <button type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#EditarModal"
+                        (click)="pasarTareas(v)"
+                        >
+                  Editar
+                </button>
+              </td>
+              <td>
+                  <button class="btn btn-danger" (click)="delete_tareas(v._id)">
+                      Borrar
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+         
+
+
+        <!--Terminacion del listado de tareas-->
+          <ul id="list">
+            <!--Modal de insertar-->
+          <form ngNativeValidate #form>
+            <div class="modal fade" id="insertarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar tarea</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="tituloDeLaTarea">Titulo</label>
+                        <input type="text"
+                               class="form-control"
+                               id="tituloDeLaTarea"
+                               placeholder="Introduzca el titulo de la tarea"
+                               [(ngModel)]="Tareas.tituloDeLaTarea"
+                               [ngModelOptions]="{standalone:true}"
+                               >
+                          </div>
+
+                        <div class="form-group">
+                        <label for="description">Descripcion</label>
+                        <input type="text"
+                               class="form-control"
+                               id="description"
+                               placeholder="Introduzca la descripcion de la tarea"
+                               [(ngModel)]="Tareas.description"
+                               [ngModelOptions]="{standalone:true}">
+                        </div>
+
+                        <div class="form-group">
+                          <label for="estado">Estado</label>
+                          <input type="checkbox"
+                                 class="form-control"
+                                 id="estado"
+                                 [(ngModel)]="Tareas.estado"
+                                 [ngModelOptions]="{standalone:true}">
+                        </div>
+                          <button type="button"
+                            class="btn btn-primary"
+                            (click)="form.checkValidity()?insert_tareas():null"
+                            >Agregar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--modal insertar terminado-->
+
+
+
+          <!--Modal  update-->
+        <form ngNativeValidate #form>
+          <div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modificar datos del Vehículo</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="tituloDeLaTarea">Titulo</label>
+                      <input type="text"
+                             class="form-control"
+                             id="tituloDeLaTarea"
+                             placeholder="Introduzca el titulo de la tarea"
+                             [(ngModel)]="TareaActualizar.tituloDeLaTarea"
+                             [ngModelOptions]="{standalone:true}"
+                             >
+                        </div>
+
+                      <div class="form-group">
+                      <label for="description">Descripcion</label>
+                      <input type="text"
+                             class="form-control"
+                             id="description"
+                             placeholder="Introduzca la descripcion de la tarea"
+                             [(ngModel)]="TareaActualizar.description"
+                             [ngModelOptions]="{standalone:true}">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="checkbox"
+                               class="form-control"
+                               id="estado"
+                               [(ngModel)]="TareaActualizar.estado"
+                               [ngModelOptions]="{standalone:true}">
+                      </div>
+                      <div class="form-group">
+                        <input type="text"
+                               class="form-control"
+                               id="_id"
+                               [(ngModel)]="TareaActualizar._id"
+                               [ngModelOptions]="{standalone:true}"
+                               hidden>
+                      </div>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" 
+                          class="btn btn-primary"
+                          (click)="form.checkValidity()?update_tareas(TareaActualizar._id):null"
+                          >Guardar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+          <!--Modal update terminado-->
+          </ul>
 </div>
+
+      <div class="add-to-do">
+          <div class="item">
+          <i class="fa fa-trash-o de" job="delete" id="0"></i>
+          <i class="fa fa-plus-circle"></i>
+          </div>
+      </div>
