@@ -24,7 +24,7 @@ export class LoginComponent  {
       return this.service.login(this.Usuario).subscribe(
         data => {
           console.log(data)
-          this.router.navigate(["/listado", {id:data.status} ])
+          this.router.navigate(["/listado", {idusuario:data.status} ])
         },
         error => console.log(error)
       )
