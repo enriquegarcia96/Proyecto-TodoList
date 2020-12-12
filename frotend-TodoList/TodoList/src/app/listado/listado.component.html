@@ -9,7 +9,7 @@
           <div id="date"></div>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()"  >
             Agregar
-          </button> 
+          </button>
       </div>
       <div class="content">
 
@@ -44,7 +44,7 @@
             </tr>
           </tbody>
         </table>
-         
+
 
 
         <!--Terminacion del listado de tareas-->
@@ -99,7 +99,7 @@
                     </form>
                   </div>
                   <div class="modal-footer">
-                    
+
                   </div>
                 </div>
               </div>
@@ -162,9 +162,9 @@
                         </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" 
+                  <button type="button"
                           class="btn btn-primary"
-                          (click)="form.checkValidity()?update_tareas(TareaActualizar._id):null"
+                          (click)="form.checkValidity()?update_tareas():null"
                           >Guardar</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>

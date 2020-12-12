@@ -10,6 +10,7 @@ router.post('/iniciarSession', usuarioControlador.login)
 router.post('/enviodelcorreo', servicioDePassword.envioDelToken)
 router.post('/get_idUsuario/:_id', usuarioControlador.get_idUsuario)
 router.post('/password/:token', servicioDePassword.comparaElToken);
-router.put('/changepassword/:id', servicioDePassword.changePassword);
+
+router.post('/changepassword', servicioDePassword.changePassword);
 
 module.exports = router;

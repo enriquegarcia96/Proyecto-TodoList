@@ -36,9 +36,10 @@ export class AppService{
    }
 
    // formulario de newpassword y envia el id del usuario
-   newPassword(newPassword: any): Observable<any>{
-     console.log(newPassword)
-     return this.httpClient.put(this.endpoint + '/changepassword/:id', newPassword, {responseType: 'json'});
+   newPassword(id: any, newPassword: any): Observable<any>{
+    console.log(id)
+    console.log(newPassword)
+     return this.httpClient.post(this.endpoint + '/changepassword?_id='+id, newPassword , {responseType: 'json'});
    }
 
 
