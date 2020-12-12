@@ -28,9 +28,9 @@ export class ListadoComponent implements OnInit {
     estado: "",
     userName : ""
   }
-  
+
   constructor(public service:AppService, private activatedRoutee: ActivatedRoute) {
-    
+
     this.listado_tareas = [];
     this.idusuario2= "";
     this.iddTarea;
@@ -48,10 +48,10 @@ export class ListadoComponent implements OnInit {
     console.log(idusuario1);
     this.idusuario2 = idusuario1;
   }
- 
-   
- 
-  
+
+
+
+
 
    get_tareas(){
      var response: any[];
@@ -74,7 +74,7 @@ export class ListadoComponent implements OnInit {
    insert_tareas(){
     var response;
     this.Tareas.userName = this.idusuario2;
-    
+
     this.service.insert_tareas(this.Tareas).subscribe(
         data => response = data,
         err => {

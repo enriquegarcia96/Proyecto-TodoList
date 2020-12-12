@@ -105,12 +105,12 @@ const comparaElToken =  async (req, res) =>{
 // cambio de contraseña del usuario
 const changePassword = async (req, res) => {
     try {
-        let userId = req.params.id
-        let {password1, password2} = req.body
-
-        if (password1 === password2) {
-            const newPasswordEncriptado = await bcryt.hash(password1,2)
-            await ModeloUsuario.findByIdAndUpdate(userId, {password: newPasswordEncriptado}, {new: true})
+        let userIdDeLaURL = req.query._id
+        let password = req.body.password
+    
+        if (password) {
+            const newPasswordEncriptado = await bcryt.hash(password,2)
+            await ModeloUsuario.findByIdAndUpdate(userIdDeLaURL, {password: newPasswordEncriptado}, {new: true})
             res.send({status: '¡Contraseña Actualizada!', message: 'OK'})
         } else {
             res.status(500).send({status: '!Contraseña incorrecta¡', message: error.message})
