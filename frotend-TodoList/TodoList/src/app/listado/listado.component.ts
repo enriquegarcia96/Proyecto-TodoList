@@ -25,7 +25,7 @@ export class ListadoComponent implements OnInit {
     _id: "",
     tituloDeLaTarea: "",
     description: "",
-    estado: "",
+    estado: false,
     userName : ""
   }
 
@@ -36,12 +36,20 @@ export class ListadoComponent implements OnInit {
     this.iddTarea;
    }
 
+
+
   ngOnInit() {
     let idusuario1 = this.activatedRoutee.snapshot.params.idusuario;
     console.log(idusuario1);
     this.idusuario2 = idusuario1;
     this.get_tareas();
   }
+
+
+  completeItem(){
+
+  }
+
 
   get_idusuario(){
       let idusuario1 = this.activatedRoutee.snapshot.params.idusuario;
@@ -70,6 +78,8 @@ export class ListadoComponent implements OnInit {
     );
 
 }
+
+
 
    insert_tareas(){
     var response;

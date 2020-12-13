@@ -1,8 +1,9 @@
 body{
   padding: 0;
   margin: 0;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   font-family: 'Titillium Web', sans-serif;
+
 }
 
 /* ------------ container ------------ */
@@ -16,12 +17,30 @@ body{
 /* ------------ header ------------ */
 .header{
   width: 480px;
-  height:200px;
-  background-color: blue;
-  background-size: 100% 200%;
-  background-repeat: no-repeat;
-  border-radius: 15px 15px 10px 0;
-  position: relative;
+  height:230px;
+  background-color: #4162f6;
+  background-size: cover;
+	background-attachment: fixed;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0 0 75% 75% / 20%;
+}
+header .overlay{
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
+
+
+}
+h1 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 80px;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-top: 40px;
 }
 .clear{
   width : 30px;
@@ -51,18 +70,16 @@ body{
 /* ------------ content ------------ */
 .content{
   width:480px;
-  height: 350px;
+  height: 480px;
   max-height:550px;
-  background-color: #FFF;
+  background-color: wheat;
   overflow: auto;
+  border: 2px solid black;
 }
 .content::-webkit-scrollbar {
   display: none;
 }
-.content ul{
-  padding:0;
-  margin:0;
-}
+
 .item{
   width:380px;
   height: 35px;
@@ -113,10 +130,8 @@ body{
 /* ------------ add item ------------ */
 .add-to-do{
   position: relative;
-  width: 480px;
-  height:50px;
-  background-color: #FFF;
-  padding: 10px;
+  width: 200px;
+  padding-right: 40%;
   border-top: 1px solid rgba(0,0,0,0.1);
 }
 .add-to-do i{
@@ -127,7 +142,7 @@ body{
 
 .add-to-do input{
   position: absolute;
-  left: 50px;
+  left: 20px;
   height: 35px;
   width: 310px;
   background-color: transparent;

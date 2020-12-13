@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recu-clave',
@@ -23,6 +24,12 @@ export class RecuClaveComponent {
         console.log('Error', error);
       },
       ()=>{
+
+        swal.fire({
+          title: 'Token enviado al correo',
+          text: "Revisa!",
+          icon: 'success'
+        })
           this.Email= {
             email: ''
           }

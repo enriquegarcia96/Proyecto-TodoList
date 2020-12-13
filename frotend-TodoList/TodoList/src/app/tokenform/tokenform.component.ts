@@ -21,6 +21,8 @@ export class TokenformComponent {
 
     return this.service.verificaElToken(this.Token).subscribe(
       data =>{
+
+
         console.log(data);
         this.router.navigate(['/newpassword',{id:data.status}])
       },
