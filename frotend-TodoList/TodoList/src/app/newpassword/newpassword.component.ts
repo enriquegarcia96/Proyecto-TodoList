@@ -43,7 +43,10 @@ export class NewpasswordComponent implements OnInit {
         error => {
           console.log('Error', error)
         },
-        () =>{}
+        () =>{
+          this.router.navigate(["/login"])
+        }
+
     )
   }
 }

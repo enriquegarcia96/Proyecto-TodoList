@@ -17,7 +17,9 @@
                         <input  type="text" class="form-control"
                                 placeholder="Ingrese su Correo"
                                 [(ngModel)]="Email.email"
-                                [ngModelOptions]="{standalone:true}" >
+                                [ngModelOptions]="{standalone:true}"
+                                autocomplete="off"
+                                >
                     </div>
                     <div class="form-group mx-sm-4" >
                       <button type="submit" (click)="olvidoSuPassword()"

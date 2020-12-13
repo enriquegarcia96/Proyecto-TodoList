@@ -1,15 +1,9 @@
 <div class="container-fluid">
-  <h1 class="text-primary">Listado de Tareas</h1>
+  <app-navbar></app-navbar>
 
   <div class="container">
       <div class="header">
-          <div class="clear">
-              <i class="fa fa-refresh"></i>
-          </div>
-          <div id="date"></div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()"  >
-            Agregar
-          </button>
+        <h1>ToDo List</h1>
       </div>
       <div class="content">
 
@@ -24,7 +18,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let v of listado_tareas">
-              <td>{{v.tituloDeLaTarea}}</td>
+              <td><input  type="checkbox"
+               class="todo-checkbox"
+               [(ngModel)]="TareaActualizar.estado"
+
+               (click)="completeItem()"
+                >{{v.tituloDeLaTarea}}</td>
               <td>{{v.description}}</td>
               <td>
                 <button type="button"
@@ -48,7 +47,7 @@
 
 
         <!--Terminacion del listado de tareas-->
-          <ul id="list">
+
             <!--Modal de insertar-->
           <form ngNativeValidate #form>
             <div class="modal fade" id="insertarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,6 +69,9 @@
                                placeholder="Introduzca el titulo de la tarea"
                                [(ngModel)]="Tareas.tituloDeLaTarea"
                                [ngModelOptions]="{standalone:true}"
+                              required="true"
+                              pattern="[a-zA-Z]+{45}"
+                              autocomplete="off"
                                >
                           </div>
 
@@ -80,7 +82,11 @@
                                id="description"
                                placeholder="Introduzca la descripcion de la tarea"
                                [(ngModel)]="Tareas.description"
-                               [ngModelOptions]="{standalone:true}">
+                               [ngModelOptions]="{standalone:true}"
+                               required="true"
+                                pattern="[a-zA-Z]+{45}"
+                                autocomplete="off"
+                               >
                         </div>
 
                         <div class="form-group">
@@ -114,7 +120,7 @@
           <div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" ngNativeValidate #form>
                   <h5 class="modal-title" id="exampleModalLabel">Modificar datos del Vehículo</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -130,6 +136,9 @@
                              placeholder="Introduzca el titulo de la tarea"
                              [(ngModel)]="TareaActualizar.tituloDeLaTarea"
                              [ngModelOptions]="{standalone:true}"
+                              required="true"
+                              pattern="[a-zA-Z]+{45}"
+                              autocomplete="off"
                              >
                         </div>
 
@@ -140,7 +149,11 @@
                              id="description"
                              placeholder="Introduzca la descripcion de la tarea"
                              [(ngModel)]="TareaActualizar.description"
-                             [ngModelOptions]="{standalone:true}">
+                             [ngModelOptions]="{standalone:true}"
+                            required="true"
+                            pattern="[a-zA-Z]+{45}"
+                            autocomplete="off"
+                             >
                       </div>
 
                       <div class="form-group">
@@ -149,7 +162,10 @@
                                class="form-control"
                                id="estado"
                                [(ngModel)]="TareaActualizar.estado"
-                               [ngModelOptions]="{standalone:true}">
+                               [ngModelOptions]="{standalone:true}"
+                                required="true"
+
+                               >
                       </div>
                       <div class="form-group">
                         <input type="text"
@@ -173,12 +189,12 @@
           </div>
         </form>
           <!--Modal update terminado-->
-          </ul>
-</div>
 
-      <div class="add-to-do">
-          <div class="item">
-          <i class="fa fa-trash-o de" job="delete" id="0"></i>
-          <i class="fa fa-plus-circle"></i>
-          </div>
-      </div>
+          <br>  <br>  <br>  <br>  <br>
+          <div class="add-to-do">
+          <ul>
+         <i class="fa fa-plus-circle"  data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()" ></i>
+          </ul>
+        </div>
+
+</div>

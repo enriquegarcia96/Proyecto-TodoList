@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { TokenformComponent } from './tokenform/tokenform.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { NewpasswordComponent } from './newpassword/newpassword.component';
     AgregarTareaComponent,
     TokenformComponent,
     NewpasswordComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

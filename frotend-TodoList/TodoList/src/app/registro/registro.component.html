@@ -20,6 +20,7 @@
                       required="true"
                       minlength="5"
                       pattern="[a-zA-Z]+{45}"
+                      autocomplete="off"
                       >
                     </div>
 
@@ -32,7 +33,7 @@
                       [(ngModel)]="Usuario.email" [ngModelOptions]="{standalone:true}"
 
                       pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-
+                      autocomplete="off"
                       >
                     </div>
                     <!---Modelo de contraseña--->
@@ -43,6 +44,7 @@
                       <input type="text" class="form-control" id="txtcolor" placeholder="Contraseña"
                       [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone:true}"
                       pattern="[a-zA-Z]+{45}"
+                      autocomplete="off"
                       >
 
                     </div>

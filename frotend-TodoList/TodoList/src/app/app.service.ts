@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AppService{
+  reser_sesssion() {
+    throw new Error('Method not implemented.');
+  }
 
   private endpoint: string;
   private endpoint1: string;
