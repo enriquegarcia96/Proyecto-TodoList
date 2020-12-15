@@ -45,6 +45,24 @@ export class AppService{
      return this.httpClient.post(this.endpoint + '/changepassword?_id='+id, newPassword , {responseType: 'json'});
    }
 
+   // verifica el token
+   loggedIn(){
+     return localStorage.getItem('status.token');
+   }
+
+   set_session(token: any){
+    localStorage.setItem("listado", JSON.stringify(token));
+  }
+
+  get_session(){
+    if(localStorage.getItem("listado") ){
+        return true;
+    }else{
+      return false;
+    }
+  }
+
+
 
    //get listado de tareas
    get_tareas(userName: any): Observable<any>{

@@ -7,6 +7,7 @@ import {ListadoComponent} from './listado/listado.component';
 import {AgregarTareaComponent} from './agregar-tarea/agregar-tarea.component';
 import {NewpasswordComponent} from './newpassword/newpassword.component';
 import {TokenformComponent} from './tokenform/tokenform.component'
+import { AdminGuard } from './admin.guard';
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registro', component:  RegistroComponent},
   {path: 'recu-clave', component: RecuClaveComponent},
-  {path: 'listado', component: ListadoComponent},
+  {path: 'listado', component: ListadoComponent, canActivate: [AdminGuard]},
   {path: 'agregar-tarea', component: AgregarTareaComponent},
   {path: 'newpassword', component: NewpasswordComponent},
   {path: 'tokenform', component: TokenformComponent}

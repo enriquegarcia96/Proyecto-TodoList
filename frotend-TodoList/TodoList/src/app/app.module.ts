@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import { TokenformComponent } from './tokenform/tokenform.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminGuard } from './admin.guard';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule
   ],
   providers: [
-    AppService
+    AppService,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

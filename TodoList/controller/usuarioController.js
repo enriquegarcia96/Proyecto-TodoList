@@ -60,7 +60,8 @@ const login = async( req, res) =>{
                     //{expiresIn: sessionAExpira}
                 ) //con esto genero un  token el cual almacena el userID
                 const userID1 = await Usuarios.findOne({email})
-                res.send({status: userID1._id})
+                res.send({status: userID1._id, data: {token}})
+                //res.send({status: token})
             }else{
                 res.status(403).send({status: 'Contraseña Incorrecta ¡BRO! :('})
             }
