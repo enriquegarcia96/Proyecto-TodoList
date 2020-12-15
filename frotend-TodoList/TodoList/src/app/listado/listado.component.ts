@@ -29,6 +29,14 @@ export class ListadoComponent implements OnInit {
     userName : ""
   }
 
+  public v={
+    _id: "",
+    tituloDeLaTarea: "",
+    description: "",
+    estado: false,
+    userName : ""
+  }
+
   constructor(public service:AppService, private activatedRoutee: ActivatedRoute) {
 
     this.listado_tareas = [];
@@ -84,7 +92,9 @@ export class ListadoComponent implements OnInit {
    insert_tareas(){
     var response;
     this.Tareas.userName = this.idusuario2;
-
+    if (this.Tareas.estado == "") {
+      this.Tareas.estado = "false"
+    }
     this.service.insert_tareas(this.Tareas).subscribe(
         data => response = data,
         err => {
@@ -128,6 +138,7 @@ delete_tareas(id1: any){
 }
 
 pasarTareas(tarea: { tituloDeLaTarea: any; description: any; estado:any, _id:any}){
+ 
   this.TareaActualizar={
       _id:tarea._id,
       tituloDeLaTarea:tarea.tituloDeLaTarea,
@@ -137,6 +148,19 @@ pasarTareas(tarea: { tituloDeLaTarea: any; description: any; estado:any, _id:any
   }
 }
 
+
+pasarTareas1(v: { tituloDeLaTarea: any; description: any; estado:any, _id:any}){
+  if (v.estado == "") {
+    v.estado = "false"
+  }
+  this.v={
+      _id:v._id,
+      tituloDeLaTarea:v.tituloDeLaTarea,
+      description:v.description,
+      estado:v.estado,
+      userName: this.idusuario2
+  }
+}
 
 update_tareas(){
   var response;
@@ -157,6 +181,39 @@ update_tareas(){
       }
   )
 
+}
+
+update_tareas_checkbox(v: { tituloDeLaTarea: any; description: any; estado:any, _id:any}){
+  var response;
+  if (v.estado == true) {
+    v.estado=false
+  }else if (v.estado == false) {
+    v.estado=true
+  }
+  this.v={
+    _id:v._id,
+    tituloDeLaTarea:v.tituloDeLaTarea,
+    description:v.description,
+    estado:v.estado,
+    userName: this.idusuario2
+}
+console.log("hola " + this.v.estado)
+  this.service.update_tareas(this.v).subscribe(
+      data => response = data,
+      err => {
+          console.log("Ocurrio un error al llamar el servicio");
+      },
+      ()=>{
+
+        swal.fire({
+          title: 'Tarea Actualizado Agregado Satisfactoriamnete',
+          text: "Excelente",
+          icon: 'success'
+        })
+             console.log()
+             this.get_tareas();
+      }
+  )
 }
 
 
