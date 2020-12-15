@@ -35,7 +35,9 @@ const envioDelToken = async (req, res) =>{
                 from: "santbanegas52@gmail.com",
                 to: email,
                 subject: "enviado desde nodemailer",
-                html:`<h5>click en esto <a href="http://localhost:4200/tokenform</a>Su token para que pueda actualizar su contraseña: ${tokenBaseDeDatos}</h5>`
+                html:` ${tokenBaseDeDatos}    Copee este token y ingreselo en el 
+                        siguiente formulario:
+                        href="http://localhost:4200/tokenform`
                 
             }       
             transporte.sendMail(opcionesEmail, (error, info)=>{
@@ -60,8 +62,8 @@ const envioDelToken = async (req, res) =>{
             let opcionesEmail = {
                 from: "santbanegas52@gmail.com",
                 to: email,
-                subject: "enviado desde nodemailer",
-                text: `este correo no existe en nuestra base de datos`
+                subject: "Empresa Todolist",
+                text: `Este correo no existe en nuestra base de datos`
             }       
             transporte.sendMail(opcionesEmail, (error, info)=>{
                 if (error) {

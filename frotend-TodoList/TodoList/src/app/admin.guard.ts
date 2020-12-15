@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
 
   constructor(private service: AppService, private router: Router ){}
 
-  canActivate(): boolean {
+  canActivate():boolean {
     if (this.service.get_session()) {
         return true;
     }else{

@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registro', component:  RegistroComponent},
   {path: 'recu-clave', component: RecuClaveComponent},
-  {path: 'listado', component: ListadoComponent, canActivate: [AdminGuard]},
+  {path: 'listado', component: ListadoComponent},
   {path: 'agregar-tarea', component: AgregarTareaComponent},
   {path: 'newpassword', component: NewpasswordComponent},
   {path: 'tokenform', component: TokenformComponent}
