@@ -2,15 +2,19 @@
   <app-navbar></app-navbar>
 
   <div class="container">
+
       <div class="header">
         <h1>ToDo List</h1>
       </div>
-      <div class="content">
-        <h2>Tarea Pendientes</h2>
+      <div class="content overflow-scroll-gradient" >
+        <div class="overflow-scroll-gradient__scroller">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-hourglass-top" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5zm2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1h-7z"/>
+        </svg></h2>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Estado</th>
+              <th scope="col"></th>
               <th scope="col">Titulo</th>
               <th scope="col">Descripcion</th>
               <th scope="col"></th>
@@ -46,11 +50,13 @@
           </tbody>
         </table>
 
-        <h2>Tarea Realizadas</h2>
+        <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+        </svg></h3>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Estado</th>
+              <th scope="col"></th>
               <th scope="col">Titulo</th>
               <th scope="col">Descripcion</th>
               <th scope="col"></th>
@@ -91,7 +97,7 @@
         <!--Terminacion del listado de tareas-->
 
             <!--Modal de insertar-->
-          <form ngNativeValidate #formInsertar>
+          <form >
             <div class="modal fade" id="insertarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -102,7 +108,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form>
+                    <form ngNativeValidate #formInsertar>
                       <div class="form-group">
                         <label for="tituloDeLaTarea">Titulo</label>
                         <input type="text"
@@ -112,7 +118,7 @@
                                [(ngModel)]="Tareas.tituloDeLaTarea"
                                [ngModelOptions]="{standalone:true}"
                               required="true"
-                              pattern="[a-zA-Z]{45}"
+                              minlength="5"
                               autocomplete="off"
                                >
                           </div>
@@ -126,7 +132,8 @@
                                [(ngModel)]="Tareas.description"
                                [ngModelOptions]="{standalone:true}"
                                required="true"
-                               pattern="[a-zA-z]{45}"
+                               pattern="[a-zA-z]+{45}"
+                               minlength="8"
                                 autocomplete="off"
                                >
                         </div>
@@ -143,7 +150,8 @@
                             class="btn btn-primary"
                             (click)="formInsertar.checkValidity()?insert_tareas():null"
                             >Agregar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #closebutton
+                    >Cerrar</button>
                     </form>
                   </div>
                   <div class="modal-footer">
@@ -178,9 +186,10 @@
                              placeholder="Introduzca el titulo de la tarea"
                              [(ngModel)]="TareaActualizar.tituloDeLaTarea"
                              [ngModelOptions]="{standalone:true}"
-                              pattern="^[a-zA-Z\s]+{2,254}"
+
                               autocomplete="off"
                               required='true'
+                              minlength="5"
                              >
                         </div>
 
@@ -193,7 +202,7 @@
                              [(ngModel)]="TareaActualizar.description"
                              [ngModelOptions]="{standalone:true}"
 
-                            pattern="[a-zA-Z]+{45}"
+                            minlength="8"
                             autocomplete="off"
                             required='true'
                              >
@@ -222,7 +231,7 @@
                                 class="btn btn-primary"
                                 (click)="formUpdate.checkValidity()?update_tareas():null"
                                 >Guardar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closebuttonUpdate>Cerrar</button>
                       </div>
                   </form>
                 </div>
@@ -234,10 +243,12 @@
           <!--Modal update terminado-->
 
           <br>  <br>  <br>  <br>  <br>
-          <div class="add-to-do">
-          <ul>
-         <i class="fa fa-plus-circle"  data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()" ></i>
-          </ul>
-        </div>
 
+        </div>
+</div>
+<!-- boton de agregar-->
+<div class="add-to-do">
+  <ul>
+ <i class="fa fa-plus-circle"  data-toggle="modal" data-target="#insertarModal" (click)="get_idusuario()" ></i>
+  </ul>
 </div>

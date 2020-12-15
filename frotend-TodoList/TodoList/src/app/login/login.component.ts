@@ -30,7 +30,14 @@ export class LoginComponent  {
           console.log(data)
           this.router.navigate(["/listado", {idusuario:data.status} ])
         },
-        error => console.log(error)
+
+        error =>
+
+        swal.fire({
+          title: 'Contraseña no coindcide con la base de datos',
+          text: "ERROR",
+          icon: 'error'
+        })
 
       )
     }

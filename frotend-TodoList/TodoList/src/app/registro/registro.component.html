@@ -1,8 +1,8 @@
-
-    <div class="container" ngNativeValidate #form>
+<form >
+    <div class="container" >
         <div class="row justify-content-center pt-5 mt-5 mr-1">
             <div class="col-md-4 formulario">
-                <form ngNativeValidate #form >
+                <form  ngNativeValidate #form>
                     <div class="form-group text-center pt-3">
                       <h1 class="text-light"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
@@ -17,10 +17,9 @@
                       </svg>
                       <input type="text" class="form-control" id="txtcolor" placeholder="Usuario"
                       [(ngModel)]="Usuario.userName" [ngModelOptions]="{standalone:true}"
-                      required="true"
                       minlength="5"
-                      pattern="[a-zA-Z]+{45}"
                       autocomplete="off"
+                      required='true'
                       >
                     </div>
 
@@ -29,11 +28,11 @@
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
                       </svg>
-                      <input type="text" class="form-control" id="txtcolor" placeholder="Correo"
+                      <input type="email" class="form-control" id="txtcolor1" placeholder="Correo"
                       [(ngModel)]="Usuario.email" [ngModelOptions]="{standalone:true}"
-
-                      pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                       autocomplete="off"
+                      required='true'
                       >
                     </div>
                     <!---Modelo de contraseña--->
@@ -41,15 +40,16 @@
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-lock2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM7 6a1 1 0 0 1 2 0v1H7V6zm3 0v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0z"/>
                       </svg>
-                      <input type="text" class="form-control" id="txtcolor" placeholder="Contraseña"
+                      <input type="text" class="form-control" id="txtcolor3" placeholder="Contraseña"
                       [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone:true}"
-                      pattern="[a-zA-Z]+{45}"
+                      minlength="5"
                       autocomplete="off"
+                      required='true'
                       >
 
                     </div>
                     <div  class="form-group mx-sm-4" >
-                      <button type="submit" class="btn btn-block ingresar" (click)="crearUsuario()"  value="Guardar">Registrar</button>
+                      <button type="submit" class="btn btn-block ingresar" (click)="form.checkValidity()?crearUsuario():null"  value="Guardar">Registrar</button>
                     </div>
                     <div class="form-group mx-sm-4 text-right">
                       <span><a [routerLink]="['/login']" class="regresar"> Regresar</a></span>
@@ -58,5 +58,4 @@
             </div>
         </div>
     </div>
-
-
+  </form>
