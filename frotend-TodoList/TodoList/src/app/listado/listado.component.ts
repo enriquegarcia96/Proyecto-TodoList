@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { AppService } from '../app.service';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
@@ -11,6 +11,9 @@ import swal from 'sweetalert2';
 })
 export class ListadoComponent implements OnInit {
   public listado_tareas : any [];
+  @ViewChild("closebutton") closebutton: any;
+  @ViewChild("closebuttonUpdate") closebuttonUpdate: any;
+
   public idusuario2: string;
   public iddTarea = {
     idta:""
@@ -108,6 +111,7 @@ export class ListadoComponent implements OnInit {
                 userName:""
             }
 
+
           swal.fire({
             title: 'Tarea Agregado Satisfactoriamnete',
             text: "Buen trabajo!",
@@ -115,6 +119,10 @@ export class ListadoComponent implements OnInit {
           })
 
             this.get_tareas();
+            this.closebutton.nativeElement.click();
+
+
+
 
         }
     )
@@ -138,7 +146,7 @@ delete_tareas(id1: any){
 }
 
 pasarTareas(tarea: { tituloDeLaTarea: any; description: any; estado:any, _id:any}){
- 
+
   this.TareaActualizar={
       _id:tarea._id,
       tituloDeLaTarea:tarea.tituloDeLaTarea,
@@ -172,12 +180,13 @@ update_tareas(){
       ()=>{
 
         swal.fire({
-          title: 'Tarea Actualizado Agregado Satisfactoriamnete',
+          title: 'Tarea Actualizado Satisfactoriamnete',
           text: "Buen trabajo!",
           icon: 'success'
         })
 
              this.get_tareas();
+             this.closebuttonUpdate.nativeElement.click();
       }
   )
 
@@ -206,7 +215,7 @@ console.log("hola " + this.v.estado)
       ()=>{
 
         swal.fire({
-          title: 'Tarea Actualizado Agregado Satisfactoriamnete',
+          title: 'Estado de Tarea Actualizado Satisfactoriamnete',
           text: "Excelente",
           icon: 'success'
         })
