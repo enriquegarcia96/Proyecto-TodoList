@@ -56,7 +56,7 @@ export class AppService{
   }
 
   delete_tareas(load: any):Observable<any>{
-    return this.httpClient.delete(this.endpoint + '/delete_tarea', {params: load, responseType: 'json'})
+    return this.httpClient.delete(this.endpoint1 + '/delete_tarea', {params: load, responseType: 'json'})
   }
 
   update_tareas(load: any): Observable<any>{

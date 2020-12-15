@@ -6,11 +6,11 @@
         <h1>ToDo List</h1>
       </div>
       <div class="content">
-
-
+        <h2>Tarea Pendientes</h2>
         <table class="table table-striped">
           <thead>
             <tr>
+              <th scope="col">Estado</th>
               <th scope="col">Titulo</th>
               <th scope="col">Descripcion</th>
               <th scope="col"></th>
@@ -18,14 +18,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let v of listado_tareas">
-              <td><input  type="checkbox"
-               class="todo-checkbox"
-               [(ngModel)]="TareaActualizar.estado"
-
-               (click)="completeItem()"
-                >{{v.tituloDeLaTarea}}</td>
-              <td>{{v.description}}</td>
-              <td>
+              <td *ngIf="v.estado===false"><input  type="checkbox"
+               [(ngModel)]="v.estado"
+               (click)="update_tareas_checkbox(v)"
+               value=""
+               id="estadocheckend"
+                >
+              </td >
+              <td *ngIf="v.estado===false">{{v.tituloDeLaTarea}}</td>
+              <td *ngIf="v.estado===false">{{v.description}}</td>
+              <td *ngIf="v.estado===false">
                 <button type="button"
                         class="btn btn-primary"
                         data-toggle="modal"
@@ -35,7 +37,47 @@
                   Editar
                 </button>
               </td>
-              <td>
+              <td *ngIf="v.estado===false">
+                  <button class="btn btn-danger" (click)="delete_tareas(v._id)">
+                      Borrar
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Tarea Realizadas</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Estado</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let v of listado_tareas">
+              <td *ngIf="v.estado===true"><input  type="checkbox"
+               [(ngModel)]="v.estado"
+               (click)="update_tareas_checkbox(v)"
+               value=""
+               id="estadocheckend"
+                >
+              </td >
+              <td *ngIf="v.estado===true">{{v.tituloDeLaTarea}}</td>
+              <td *ngIf="v.estado===true">{{v.description}}</td>
+              <td *ngIf="v.estado===true">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#EditarModal"
+                        (click)="pasarTareas(v)"
+                        >
+                  Editar
+                </button>
+              </td>
+              <td *ngIf="v.estado===true">
                   <button class="btn btn-danger" (click)="delete_tareas(v._id)">
                       Borrar
                   </button>
@@ -163,7 +205,6 @@
                                id="estado"
                                [(ngModel)]="TareaActualizar.estado"
                                [ngModelOptions]="{standalone:true}"
-                                required="true"
 
                                >
                       </div>
