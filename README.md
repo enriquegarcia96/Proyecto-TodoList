@@ -2,4 +2,4 @@
 Proyecto de Seminario de Software
 
 
-aplicación elaborada con Nodejs y angular 
+aplicación elaborada con MongoDB, Express,Nodejs y Angular 
